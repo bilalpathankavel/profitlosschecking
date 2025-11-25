@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profit & Loss Calculator (Loaded Rate)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>💰 Trade P&L Calculator (With Charges)</h1>
+        <p>Enter the Buy and Sell details for a single trade to calculate the Net Profit/Loss after all custom charges.</p>
+        
+        <div class="input-grid">
+            
+            <div class="trade-input buy-side">
+                <h2>📈 Buy Side</h2>
+                <label for="buyQty">Quantity (Qty):</label>
+                <input type="number" id="buyQty" value="100" min="1">
+                
+                <label for="buyPrice">Price (per share):</label>
+                <input type="number" id="buyPrice" value="1000" min="0.01">
+                
+                <label for="buySegment">Trade Segment:</label>
+                <select id="buySegment">
+                    <option value="ROLLING T1">Delivery (Rolling T1)</option>
+                    <option value="INTRADAY">Intraday</option>
+                    <option value="F&O">F&O</option>
+                </select>
+            </div>
+
+            <div class="trade-input sell-side">
+                <h2>📉 Sell Side</h2>
+                <label for="sellQty">Quantity (Qty):</label>
+                <input type="number" id="sellQty" value="100" min="1">
+                
+                <label for="sellPrice">Price (per share):</label>
+                <input type="number" id="sellPrice" value="1050" min="0.01">
+                
+                <label for="sellSegment">Trade Segment:</label>
+                <select id="sellSegment">
+                    <option value="ROLLING T1">Delivery (Rolling T1)</option>
+                    <option value="INTRADAY">Intraday</option>
+                    <option value="F&O">F&O</option>
+                </select>
+            </div>
+
+        </div>
+
+        <button onclick="calculateProfitLoss()" id="calculateButton">Calculate P&L</button>
+        
+        <h2 id="resultsHeader" class="hidden">Calculation Summary</h2>
+        <div id="resultsTableContainer" class="hidden">
+            <table id="resultsTable">
+                <thead>
+                    <tr>
+                        <th>Side</th>
+                        <th>Trade Value</th>
+                        <th>STT</th>
+                        <th>SEBI/Exch. Charges</th>
+                        <th>Stamp Duty</th>
+                        <th>Brokerage + GST</th>
+                        <th>Total Charges</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="buy-row"></tr>
+                    <tr id="sell-row"></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="loadedRateSection" class="hidden">
+            <h3>Loaded Rate / Break-Even Price</h3>
+            <p>The minimum price you need to sell the stock at to cover all Buy and Sell charges:</p>
+            <p><strong>Sell Price Required to Break Even:</strong> <span id="loaded-rate" class="value profit"></span></p>
+        </div>
+
+        <div id="finalPL" class="hidden">
+            <h3>Net Profit/Loss</h3>
+            <p>Gross Profit (before charges): <span id="gross-pl" class="value"></span></p>
+            <p>Total Charges (Buy + Sell): <span id="total-charges-pl" class="value"></span></p>
+            <hr>
+            <p><strong>Net Profit / Loss:</strong> <span id="net-pl" class="value"></span></p>
+        </div>
+        
+        <p id="errorMsg" class="error hidden"></p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
